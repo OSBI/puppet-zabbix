@@ -7,9 +7,6 @@ class zabbix::agent {
     package {
         "zabbix-agent":
             ensure => installed;
-        "curl":
-            ensure => installed,
-            before => File[$zabbix_register_sh];
     }
 
     service {
