@@ -8,9 +8,9 @@ package { ["zabbix-server-mysql", "zabbix-frontend-php"]:
 	}
     
     file {
-        #"/etc/zabbix/zabbix_server.conf":
-        #    ensure  => present,
-        #    content => template("zabbix/zabbix_server.conf.erb");
+        "/etc/zabbix/dbconfig.php":
+            ensure  => present,
+            content => template("zabbix/dbconfig.php.erb");
         "/etc/zabbix/zabbix_server.d/":
             ensure => directory,
             owner  => "zabbix",
