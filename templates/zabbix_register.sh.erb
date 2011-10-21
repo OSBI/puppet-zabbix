@@ -19,7 +19,7 @@ URL=https://<%= zabbix_server %>:<%= zabbixport %>
 
 curl --insecure -c $COOKIE -D $HEADERS -d "login=1&form_refresh=1&name=$USERNAME&password=$PASSWORD&enter=Enter" $URL/index.php > $OUT1
 
-SESSION=`awk '/<%= zabbixserver %>/ { print $7 }' $COOKIE`
+SESSION=`awk '/<%= zabbix_server %>/ { print $7 }' $COOKIE`
 SID=`echo $SESSION | cut -c 17-`
 
 # Normally 1 long line -- split for readability
