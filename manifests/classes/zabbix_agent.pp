@@ -1,8 +1,5 @@
-
-$zabbix_user_parameters = []
-
 class zabbix::agent {
-
+	$zabbix_user_parameters = []
  	$zabbix_config_dir = "/etc/zabbix"
     $zabbix_agentd_conf = "$zabbix_config_dir/zabbix_agentd.conf"
     $zabbix_register_sh = "$zabbix_config_dir/zabbix_register.sh"
