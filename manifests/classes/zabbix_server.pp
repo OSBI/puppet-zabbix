@@ -23,6 +23,9 @@ package { ["zabbix-server-mysql", "zabbix-frontend-php"]:
             ensure => directory,
             owner  => "zabbix",
             group  => "zabbix";
+        "/etc/zabbix/zabbix_server.conf":
+        	ensure => present,
+        	content => template("zabbix/zabbix_server_conf.erb");
     }
 
 	mysql::database{"zabbix":
