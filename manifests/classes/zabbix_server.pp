@@ -25,5 +25,32 @@ package { ["zabbix-server-mysql", "zabbix-frontend-php"]:
             group  => "zabbix";
     }
 
+	mysql::database{"zabbix":
+  		ensure   => present,
+  		require => Class["mysql::server"]
+	}
+
+
+	mysql::rights{"zabbix rights":
+  		ensure   => present,
+  		database => "zabbix",
+  		user     => "zabbix",
+  		password => "u9p7ilG2E6DycOfwKm27",
+  		require => Class["mysql::server"],
+	}
+
+	exec { "importzabbixschema":
+		cwd => "/tmp",
+		command => "mysql -uroot zabbix < /usr/share/zabbix-server/mysql.sql",
+		refreshonly => true,
+		require => Mysql::Database["zabbix"],
+	}
+
+	exec { "importzabbixdata":
+		cwd => "/tmp",
+		command => "mysql -uroot zabbix < /usr/share/zabbix-server/data.sql",
+		refreshonly => true,
+		require => Exec["importzabbixschema"],
+	}
 
 }
