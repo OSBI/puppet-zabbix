@@ -25,13 +25,6 @@ class zabbix::agent {
             mode => 0755,
             require => Package["zabbix-agent"];    
 
-        $zabbix_register_sh:
-            owner => root,
-            group => root,
-            mode => 0700,
-            content => template("zabbix/zabbix_register.sh.erb"),
-            require => Package["zabbix-agent"];
-
         $zabbix_agent_conf:
             owner => root,
             group => root,
@@ -47,5 +40,4 @@ class zabbix::agent {
             require => Package["zabbix-agent"];
     }
 
-    exec { $zabbix_register_sh:  }
 }
