@@ -4,7 +4,7 @@ include mysql::server
 
 package { ["zabbix-server-mysql", "zabbix-frontend-php"]:
 	ensure => present,
-	require => Service["mysqld"],
+#	require => Service["mysqld"],
 	}
     
     file {
