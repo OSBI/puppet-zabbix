@@ -1,6 +1,7 @@
 class zabbix::server {
 
 include apache
+include php
 include php::apache
 include mysql::server
 
