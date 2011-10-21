@@ -1,0 +1,30 @@
+#!/bin/bash
+
+##"curl --insecure..." is used by me because the server is using a self signed
+##certificate and I'm not worried about MITM etc. attacks.
+
+HOST=<%= shortname %>
+IP=<%= ipaddress %>
+
+BASE=/tmp/zabpush
+COOKIE=$BASE.cookies.txt
+OUT1=$BASE.login.html
+OUT2=$BASE.host.html
+HEADERS=$BASE.headers.txt
+
+USERNAME=<%= zabbixadmin %>
+PASSWORD=<%= zabbixpassword %>
+
+URL=https://<%= zabbix_server %>:<%= zabbixport %>
+
+curl --insecure -c $COOKIE -D $HEADERS -d "login=1&form_refresh=1&name=$USERNAME&password=$PASSWORD&enter=Enter" $URL/index.php > $OUT1
+
+SESSION=`awk '/<%= zabbixserver %>/ { print $7 }' $COOKIE`
+SID=`echo $SESSION | cut -c 17-`
+
+# Normally 1 long line -- split for readability
+FORM="sid=$SID&form=Create+Host&form_refresh=2&config=0&groupid=0&groups%5B5%5D=5&templates%5B10001%5D=Template_Linux&ipmi_port=623&ipmi_privilege=2&ipmi_username="FORM="$FORM&ipmi_password=&devicetype=&name=&os=&serialno=&tag=&macaddress=&hardware=&software=&contact=&location=&notes=&ext_host_profiles%5Bdevice_alias%5D="FORM="$FORM&ext_host_profiles%5Bdevice_type%5D=&ext_host_profiles%5Bdevice_chassis%5D=&ext_host_profiles%5Bdevice_os%5D=&ext_host_profiles%5Bdevice_os_short%5D="FORM="$FORM&ext_host_profiles%5Bdevice_hw_arch%5D=&ext_host_profiles%5Bdevice_serial%5D=&ext_host_profiles%5Bdevice_model%5D=&ext_host_profiles%5Bdevice_tag%5D="FORM="$FORM&ext_host_profiles%5Bdevice_vendor%5D=&ext_host_profiles%5Bdevice_contract%5D=&ext_host_profiles%5Bdevice_who%5D=&ext_host_profiles%5Bdevice_status%5D="FORM="$FORM&ext_host_profiles%5Bdevice_app_01%5D=&ext_host_profiles%5Bdevice_app_02%5D=&ext_host_profiles%5Bdevice_app_03%5D=&ext_host_profiles%5Bdevice_app_04%5D="FORM="$FORM&ext_host_profiles%5Bdevice_app_05%5D=&ext_host_profiles%5Bdevice_url_1%5D=&ext_host_profiles%5Bdevice_url_2%5D=&ext_host_profiles%5Bdevice_url_3%5D="FORM="$FORM&ext_host_profiles%5Bdevice_networks%5D=&ext_host_profiles%5Bdevice_notes%5D=&ext_host_profiles%5Bdevice_hardware%5D=&ext_host_profiles%5Bdevice_software%5D="FORM="$FORM&ext_host_profiles%5Bip_subnet_mask%5D=&ext_host_profiles%5Bip_router%5D=&ext_host_profiles%5Bip_macaddress%5D=&ext_host_profiles%5Boob_ip%5D="FORM="$FORM&ext_host_profiles%5Boob_subnet_mask%5D=&ext_host_profiles%5Boob_router%5D=&ext_host_profiles%5Bdate_hw_buy%5D=&ext_host_profiles%5Bdate_hw_install%5D="FORM="$FORM&ext_host_profiles%5Bdate_hw_expiry%5D=&ext_host_profiles%5Bdate_hw_decomm%5D=&ext_host_profiles%5Bsite_street_1%5D=&ext_host_profiles%5Bsite_street_2%5D="FORM="$FORM&ext_host_profiles%5Bsite_street_3%5D=&ext_host_profiles%5Bsite_city%5D=&ext_host_profiles%5Bsite_state%5D=&ext_host_profiles%5Bsite_country%5D="FORM="$FORM&ext_host_profiles%5Bsite_zip%5D=&ext_host_profiles%5Bsite_rack%5D=&ext_host_profiles%5Bsite_notes%5D=&ext_host_profiles%5Bpoc_1_name%5D="FORM="$FORM&ext_host_profiles%5Bpoc_1_email%5D=&ext_host_profiles%5Bpoc_1_phone_1%5D=&ext_host_profiles%5Bpoc_1_phone_2%5D=&ext_host_profiles%5Bpoc_1_cell%5D="FORM="$FORM&ext_host_profiles%5Bpoc_1_screen%5D=&ext_host_profiles%5Bpoc_1_notes%5D=&ext_host_profiles%5Bpoc_2_name%5D=&ext_host_profiles%5Bpoc_2_email%5D="FORM="$FORM&ext_host_profiles%5Bpoc_2_phone_1%5D=&ext_host_profiles%5Bpoc_2_phone_2%5D=&ext_host_profiles%5Bpoc_2_cell%5D=&ext_host_profiles%5Bpoc_2_screen%5D="FORM="$FORM&ext_host_profiles%5Bpoc_2_notes%5D=&host=$HOST&newgroup=&dns=&ip=$IP&useip=1&port=10050&proxy_hostid=0&status=0&save=Save"
+
+curl --insecure -c $COOKIE -D $HEADERS -b zbx_sessionid=$SESSION -d "$FORM" $URL/hosts.php > $OUT2
+
+rm $BASE*
