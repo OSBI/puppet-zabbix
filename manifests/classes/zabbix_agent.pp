@@ -43,7 +43,7 @@ class zabbix::agent {
             owner => root,
             group => root,
             mode => 0644,
-            content => template("zabbix/zabbix_agentd.conf.erb"),
+            content => template("zabbix/zabbix_agentd_conf.erb"),
             require => Package["zabbix-agent"];
     }
 
