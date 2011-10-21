@@ -1,3 +1,6 @@
+
+$zabbix_user_parameters = []
+
 class zabbix::agent {
 
  	$zabbix_config_dir = "/etc/zabbix"
