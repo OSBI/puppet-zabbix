@@ -1,0 +1,25 @@
+{
+  "name": "tombarber-puppet-zabbix",
+  "author": "tombarber",
+  "description": "",
+  "license": "",
+  "project_page": "",
+  "source": "",
+  "summary": "",
+  "version": "0.0.1",
+  "checksums": {
+    "Modulefile": "c02a62c03eafb0ec336d80d371ddfb8b",
+    "README": "34d0a58065889a397ac9e302adf7718f",
+    "manifests/init.pp": "ce392103c79928cf337a23e099054843",
+    "manifests/zabbix_agent.pp": "f573de13738e1e7f674a8dc102d22aa2",
+    "manifests/zabbix_server.pp": "92039def431706f05f4b824a11b0f744",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "templates/dbconfig.php.erb": "84375148a45892ce166ac211ddec852a",
+    "templates/zabbix_agent_conf.erb": "aeb26729d2dccbd3210f08e95df9e5b3",
+    "templates/zabbix_agentd_conf.erb": "2435b333ff12b8ac39daa456c80b10c9",
+    "templates/zabbix_server_conf.erb": "76ca3976c96d6795defad1820aba1b05",
+    "tests/init.pp": "c7392160917b0120552519a14b280206"
+  },
+  "dependencies": []
+}
