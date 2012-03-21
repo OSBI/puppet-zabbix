@@ -1,1 +1,1 @@
-include puppet-zabbix
+include zabbix
