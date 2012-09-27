@@ -22,15 +22,15 @@
   "dependencies": [
     {
       "name": "Analytical Labs/apache",
-      "versionRequirement": "\u003d\u003d1.0"
+      "version_requirement": "\u003d\u003d1.0"
     },
     {
       "name": "Analytical Labs/mysql",
-      "versionRequirement": "\u003d\u003d1.0"
+      "version_requirement": "\u003d\u003d1.0"
     },
     {
       "name": "Analytical Labs/php",
-      "versionRequirement": "\u003d\u003d1.0"
+      "version_requirement": "\u003d\u003d1.0"
     }
   ]
 }
