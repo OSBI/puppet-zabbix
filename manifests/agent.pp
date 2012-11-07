@@ -58,6 +58,7 @@ class zabbix::agent {
 	 exec { "extract":
     command => "tar xvfz mysql_performance_monitor_agent-0.9.tar.gz",
     creates => "/usr/local/mysql_performance_monitor_agent-0.9",
+    cwd => "/usr/local",
     user => "root",
     path    => "/usr/bin/:/bin/:/home/ingres/ingres/bin:/home/ingres/ingres/utility",    
   } ->
