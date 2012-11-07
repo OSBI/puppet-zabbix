@@ -18,7 +18,7 @@ class zabbix::agent {
 	$zabbix_register_sh = "/etc/zabbix/zabbix_register.sh"
 	$zabbix_agent_conf = "/etc/zabbix/zabbix_agent.conf"
 	package {
-		["zabbix-agent", "libio-all-lwp-perl", "LWP.pm"] :
+		["zabbix-agent", "libio-all-lwp-perl", "libfile-which-perl"] :
 			ensure => installed ;
 	}
 	service {
