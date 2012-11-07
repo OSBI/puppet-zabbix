@@ -64,7 +64,7 @@ class zabbix::agent {
   } ->
   file { "/usr/local/mysql_performance_monitor":
     ensure => link,
-    source => "/usr/local/mysql_performance_monitor_agent-0.9"
+    target => "/usr/local/mysql_performance_monitor_agent-0.9"
     
   }-> 
   file {"/usr/local/mysql_performance_monitor/etc/FromDualMySQLagent.conf":
