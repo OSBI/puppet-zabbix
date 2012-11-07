@@ -68,7 +68,7 @@ class zabbix::agent {
   }-> 
   file {"/usr/local/mysql_performance_monitor/etc/FromDualMySQLagent.conf":
     ensure => present,
-    content => template("FromDualMySQLagent.conf.template.erb"),
+    content => template("zabbix/FromDualMySQLagent.conf.template.erb"),
     
   }
 }
