@@ -1,0 +1,19 @@
+[default]
+
+Type         = mysqld
+Debug         = 2
+LogFile       = /tmp/FromDualMySQLagent.log
+CacheFileBase = /tmp/FromDualAgentCache
+Username     = zabbix
+Password     = some_password
+MysqlHost    = 127.0.0.1
+MysqlPort    = 3306
+ZabbixServer = 176.34.241.162
+Disabled     = false
+Modules      = process mysql myisam innodb
+ClusterLog   = /var/lib/mysql-cluster/ndb_1_cluster.log
+PidFile      = /var/lib/mysql/data/mysql.pid
+
+[<%=fqdn %>]
+Type         = mysqld
+Modules      = mpm server process mysql myisam
