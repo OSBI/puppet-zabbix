@@ -60,7 +60,7 @@ class zabbix::agent {
     creates => "/usr/local/mysql_performance_monitor_agent-0.9",
     cwd => "/usr/local",
     user => "root",
-    path    => "/usr/bin/:/bin/:/home/ingres/ingres/bin:/home/ingres/ingres/utility",    
+    path    => "/usr/bin/:/bin/",    
   } ->
   file { "/usr/local/mysql_performance_monitor":
     ensure => link,
