@@ -34,21 +34,24 @@ class zabbix::agent {
 			owner => root,
 			group => root,
 			mode => 0755,
-			require => Package["zabbix-agent"] ;
+			require => Package["zabbix-agent"],
+			notify => Service["zabbix-agent"] ;
 
 		$zabbix_agent_conf :
 			owner => root,
 			group => root,
 			mode => 0644,
 			content => template("zabbix/zabbix_agent_conf.erb"),
-			require => Package["zabbix-agent"] ;
+			require => Package["zabbix-agent"],
+			notify => Service["zabbix-agent"] ;
 
 		$zabbix_agentd_conf :
 			owner => root,
 			group => root,
 			mode => 0644,
 			content => template("zabbix/zabbix_agentd_conf.erb"),
-			require => Package["zabbix-agent"] ;
+			require => Package["zabbix-agent"],
+			notify => Service["zabbix-agent"] ;
 	}
 	
 	file{"/usr/local/mysql_performance_monitor_agent-0.9.tar.gz":
